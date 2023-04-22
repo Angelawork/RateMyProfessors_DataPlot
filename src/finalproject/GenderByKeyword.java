@@ -1,7 +1,6 @@
 package finalproject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class GenderByKeyword extends DataAnalyzer {
@@ -32,16 +31,25 @@ public class GenderByKeyword extends DataAnalyzer {
 	public void extractInformation() {
 		int comment_index = parser.fields.get("comments");
 		int gender_index = parser.fields.get("gender");
-		maleTable=new MyHashTable<>();
-		femaleTable=new MyHashTable<>();
-		xTable=new MyHashTable<>();
+		maleTable=new MyHashTable<>(150);
+		femaleTable=new MyHashTable<>(150);
+		xTable=new MyHashTable<>(150);
 
 		for (int i = 0; i < parser.data.size(); i++) {
 			String gender=parser.data.get(i)[gender_index];
 			String comment=parser.data.get(i)[comment_index].toLowerCase();
 
-			String[] words=comment.replaceAll("[^a-z’]"," ").split(" ");
-			for(String elmt: words){
+			String[] words=replace(comment).split(" ");//comment.replaceAll("[^a-z']"," ").split(" ");
+
+			/*
+			MyHashTable<String,String> unique_words=new MyHashTable<>();
+			for (String elmt : words) {
+				unique_words.put(elmt,elmt);
+			}
+			ArrayList<String> mywords=unique_words.getValueSet();
+			 */
+
+			for (String elmt : words) {
 				if(elmt.equalsIgnoreCase(""))continue;
 
 				if(gender.equalsIgnoreCase("M")){
@@ -61,12 +69,12 @@ public class GenderByKeyword extends DataAnalyzer {
 		}
 	}
 
-	/*
+
 	private String replace(String target){
 		StringBuilder output=new StringBuilder();
 		for(int i=0;i<target.length();i++){
 			char word=target.charAt(i);
-			if(!(word>='a'&&word<='z') && word!='’'){
+			if(!(word>='a'&&word<='z') && word!='\''){
 				output.append(' ');
 			}else{
 				output.append(word);
@@ -74,6 +82,6 @@ public class GenderByKeyword extends DataAnalyzer {
 		}
 		return output.toString();
 	}
-	 */
+
 
 }

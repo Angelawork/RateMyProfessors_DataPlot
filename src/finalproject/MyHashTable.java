@@ -1,7 +1,6 @@
 package finalproject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -82,7 +81,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 			}
 		}
 
-		bucketList.addFirst(inputNode);
+		bucketList.addLast(inputNode);
 		size++;
 		if(size > MAX_LOAD_FACTOR*this.capacity){ //never be greater than the maximum load factor
 			this.rehash();
@@ -187,17 +186,17 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 	 * Expected average runtime is O(m) where m is the number of buckets
 	 */
 	public ArrayList<V> getValueSet() {
-		HashSet<V> output=new HashSet<>();
+		MyHashTable<V,V> output=new MyHashTable<>();
 
 		for(int i=0;i < this.capacity;i++) {
 			LinkedList<MyPair<K,V>> bucketList=this.buckets.get(i);
 			for (MyPair<K, V> node : bucketList) {
 				V nodeValue=node.getValue();
-				output.add(nodeValue);
+				output.put(nodeValue,nodeValue);//used as a hashset?
 			}
 		}
 
-		ArrayList<V> result=new ArrayList<>(output);//convert to desired type?
+		ArrayList<V> result=output.getKeySet();
 		return result;
 	}
 
@@ -240,7 +239,9 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		}
 
 		@Override
-		public MyPair<K,V> next() {
+		public MyPair<K,V> next() {//if the iteration has no more elements?
+			if(index==myEntries.size()) return null;
+
 			MyPair<K,V> output=myEntries.get(index);
 			index++;
 

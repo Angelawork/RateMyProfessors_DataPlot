@@ -1,9 +1,6 @@
 package finalproject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class RatingByKeyword extends DataAnalyzer {
 	private MyHashTable<String, MyHashTable<String, Integer>> storageTable;
@@ -48,19 +45,22 @@ public class RatingByKeyword extends DataAnalyzer {
 					break;
 			}
 
-			String[] words = comment.replaceAll("[^a-z’]", " ").split(" ");//apostrophe char?
+			String[] words = replace(comment).split(" ");//apostrophe char?
 
-			//for unique words in 1 comment
-			HashSet<String> unique_words=new HashSet<>();
-			Collections.addAll(unique_words, words);
-			words=unique_words.toArray(new String[unique_words.size()]);
-
+			//for unique words in 1 comment??
+			MyHashTable<String,String> unique_words=new MyHashTable<>(200);
 			for (String elmt : words) {
+				unique_words.put(elmt,elmt);
+			}
+			ArrayList<String> mywords=unique_words.getKeySet();
+
+			for (String elmt : mywords) {
 				if (elmt.equalsIgnoreCase("")) continue;
+				//else if(storageTable.getKeySet().contains(elmt)) continue;
 
 				MyHashTable<String, Integer> infoTable=storageTable.get(elmt);
 				if(infoTable==null){
-					infoTable=new MyHashTable<>();
+					infoTable=new MyHashTable<>(7);
 					infoTable.put("1",0);
 					infoTable.put("2",0);
 					infoTable.put("3",0);
@@ -71,5 +71,17 @@ public class RatingByKeyword extends DataAnalyzer {
 				storageTable.put(elmt,infoTable);
 			}
 		}
+	}
+	private String replace(String target){
+		StringBuilder output=new StringBuilder();
+		for(int i=0;i<target.length();i++){
+			char word=target.charAt(i);
+			if(!(word>='a'&&word<='z') && word!='\''){
+				output.append(' ');
+			}else{
+				output.append(word);
+			}
+		}
+		return output.toString();
 	}
 }

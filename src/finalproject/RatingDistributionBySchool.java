@@ -1,9 +1,6 @@
 package finalproject;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RatingDistributionBySchool extends DataAnalyzer {
 	private MyHashTable<String, MyHashTable<String, Integer>> storageTable;
@@ -26,7 +23,7 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 		int school_index = parser.fields.get("school_name");
 		int rating_index=parser.fields.get("student_star");
 
-		storageTable = new MyHashTable<>();
+		storageTable = new MyHashTable<>(150);
 		scoreTable=new MyHashTable<>();
 		for (int i = 0; i < parser.data.size(); i++) {
 			String name = parser.data.get(i)[name_index].trim().toLowerCase();
@@ -54,7 +51,7 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 			}
 		}
 
-		outputTable=new MyHashTable<>();
+		outputTable=new MyHashTable<>(150);
 		for (int i = 0; i < parser.data.size(); i++) {
 			String name = parser.data.get(i)[name_index].trim().toLowerCase();
 			String school = parser.data.get(i)[school_index].trim().toLowerCase();

@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b75f5eb-ed82-45f8-a3e2-8149077513ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RateMyProf_Data_Gendered.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RateMyProf_Data_Gendered_Sample.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingDistributionByProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingDistributionByProf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/myTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/myTester.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +42,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/HQC/COMP 250/COMP 250 Final project/FinalProject&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/HQC/COMP 250/COMP 250 A2/Assignment2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -80,19 +86,26 @@
       <workItem from="1681767797293" duration="8377000" />
       <workItem from="1681778013315" duration="13064000" />
       <workItem from="1681794677044" duration="2865000" />
-      <workItem from="1681832032173" duration="5677000" />
+      <workItem from="1681832032173" duration="6176000" />
+      <workItem from="1681843031050" duration="93000" />
+      <workItem from="1681843146010" duration="1654000" />
+      <workItem from="1681863959044" duration="226000" />
+      <workItem from="1681864562261" duration="36000" />
+      <workItem from="1681864664848" duration="29000" />
+      <workItem from="1681864861352" duration="45000" />
+      <workItem from="1681916946475" duration="478000" />
+      <workItem from="1681953617094" duration="581000" />
+      <workItem from="1681968091176" duration="61000" />
+      <workItem from="1682014407281" duration="2811000" />
+      <workItem from="1682048522956" duration="14000" />
+      <workItem from="1682092377316" duration="4537000" />
+      <workItem from="1682131468726" duration="1124000" />
+      <workItem from="1682187932498" duration="5450000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/src/finalproject/myTester.java" line="29">
-        <watch expression="t.storageTable.buckets.get(5)" language="JAVA" />
-      </inline-watch>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

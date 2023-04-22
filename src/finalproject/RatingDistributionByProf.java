@@ -1,10 +1,5 @@
 package finalproject;
 
-import javafx.util.Pair;
-
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class RatingDistributionByProf extends DataAnalyzer {
 
 	private MyHashTable<String, MyHashTable<String, Integer>> storageTable;
@@ -51,7 +46,7 @@ public class RatingDistributionByProf extends DataAnalyzer {
 
 			MyHashTable<String, Integer> infoTable=storageTable.get(name);
 			if(infoTable==null){
-				infoTable=new MyHashTable<>();
+				infoTable=new MyHashTable<>(5);
 				infoTable.put("1",0);
 				infoTable.put("2",0);
 				infoTable.put("3",0);

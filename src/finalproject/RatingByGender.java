@@ -11,7 +11,7 @@ public class RatingByGender extends DataAnalyzer{
 	@Override
 	public MyHashTable<String, Integer> getDistByKeyword(String keyword) {
 
-		String[] words=keyword.split(",");//will there be error if not correct format?
+		String[] words=keyword.trim().split(",");//will there be error if not correct format?
 		String gender=words[0];//can't be lowercase
 		String type=words[1].toLowerCase();
 
@@ -71,11 +71,11 @@ public class RatingByGender extends DataAnalyzer{
 			}
 
 			MyHashTable<String, MyHashTable<String, Integer>> genderTable = myTable.get(gender);
-			if(genderTable==null) genderTable=new MyHashTable<>();
+			if(genderTable==null) genderTable=new MyHashTable<>(6);
 
 			MyHashTable<String, Integer> qualityTable=genderTable.get("quality");
 			if (qualityTable == null) {
-				qualityTable = new MyHashTable<>();//run in O(1)?
+				qualityTable = new MyHashTable<>(7);//run in O(1)?
 				qualityTable.put("1", 0);
 				qualityTable.put("2", 0);
 				qualityTable.put("3", 0);
@@ -87,7 +87,7 @@ public class RatingByGender extends DataAnalyzer{
 
 			MyHashTable<String, Integer> diffTable =genderTable.get("difficulty");
 			if (diffTable == null) {
-				diffTable = new MyHashTable<>();//run in O(1)?
+				diffTable = new MyHashTable<>(7);//run in O(1)?
 				diffTable.put("1", 0);
 				diffTable.put("2", 0);
 				diffTable.put("3", 0);
