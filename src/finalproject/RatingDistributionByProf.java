@@ -25,7 +25,7 @@ public class RatingDistributionByProf extends DataAnalyzer {
 			double score=Double.parseDouble(parser.data.get(i)[rating_index]);
 
 			int rating_number= (int) Math.floor(score);
-			String rating="3";
+			String rating="5";
 			switch(rating_number){
 				case 1:
 					rating="1";
