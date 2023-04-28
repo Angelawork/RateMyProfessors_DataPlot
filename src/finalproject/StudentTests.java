@@ -1,15 +1,13 @@
 package finalproject;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.stream.Collector.*;
+import java.util.*;
+import java.util.function.Supplier;
+import java.time.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -166,15 +164,15 @@ class HashTableTests {
   @Test
   @DisplayName("Get test 3")
   void getTest3() {
-      MyHashTable<Object, Object> table = new MyHashTable<>();
-      int key = 10;
-      int val1 = 20;
-      int val2 = 200;
+    MyHashTable<Object, Object> table = new MyHashTable<>();
+    int key = 10;
+    int val1 = 20;
+    int val2 = 200;
 
-      table.put(key, val1);
-      table.put(key, val2);
+    table.put(key, val1);
+    table.put(key, val2);
 
-      assertEquals(200, table.get(10));
+    assertEquals(200, table.get(10));
   }
 
   @Test
@@ -351,28 +349,45 @@ class HashTableTests {
   @Test
   @DisplayName("rehash test 3")
   void rehashTest3() {
-      MyHashTable<Object, Object> table = new MyHashTable<>();
+    MyHashTable<Object, Object> table = new MyHashTable<>();
 
-      assertEquals(16, table.numBuckets());
+    assertEquals(16, table.numBuckets());
 
-      table.put(1, 10);
-      table.put(16, 20);
-      table.put(17, 30);
-      table.put(32, 40);
+    table.put(1, 10);
+    table.put(16, 20);
+    table.put(17, 30);
+    table.put(32, 40);
 
-      ArrayList<LinkedList<MyPair<Object, Object>>> buckets1 = table.getBuckets();
-      assertEquals(2, buckets1.get(0).size());
-      assertEquals(2, buckets1.get(1).size());
+    ArrayList<LinkedList<MyPair<Object, Object>>> buckets1 = table.getBuckets();
+    assertEquals(2, buckets1.get(0).size());
+    assertEquals(2, buckets1.get(1).size());
 
-      table.rehash();
-      assertEquals(32, table.numBuckets());
+    table.rehash();
+    assertEquals(32, table.numBuckets());
 
-      // if properly rehashed, the index of elements in the hashmap should be properly reorganized
-      ArrayList<LinkedList<MyPair<Object, Object>>> buckets2 = table.getBuckets();
-      assertEquals(1, buckets2.get(0).size());
-      assertEquals(1, buckets2.get(1).size());
-      assertEquals(1, buckets2.get(16).size());
-      assertEquals(1, buckets2.get(17).size());
+    // if properly rehashed, the index of elements in the hashmap should be properly reorganized
+    ArrayList<LinkedList<MyPair<Object, Object>>> buckets2 = table.getBuckets();
+    assertEquals(1, buckets2.get(0).size());
+    assertEquals(1, buckets2.get(1).size());
+    assertEquals(1, buckets2.get(16).size());
+    assertEquals(1, buckets2.get(17).size());
+  }
+
+  //check if rehash handled keys with same hash values
+  @Test
+  @DisplayName("rehash test 4")
+  void rehashTest4() {
+    MyHashTableADV<Integer, String> tester = new MyHashTableADV<Integer, String>(3);
+
+    tester.put(3, "key 3");
+    tester.put(9, "key 9");
+
+    tester.rehash();
+
+    ArrayList<LinkedList<MyPair<Integer, String>>> buckets = tester.getBuckets();
+    assertEquals(2, tester.size());
+    assertEquals(6, tester.numBuckets());
+    assertEquals(2, buckets.get(3).size());
   }
 
   // standard iteration
@@ -414,6 +429,24 @@ class HashTableTests {
     Iterator<MyPair<Integer, Integer>> i = table.iterator();
     assertTrue(i.hasNext());
     i.next();
+    assertFalse(i.hasNext());
+  }
+
+  // check hasNext() returns
+  @Test
+  @DisplayName("iterator test 3")
+  void iteratorTest3() {
+    MyHashTable<Integer, Integer> table = new MyHashTable<>();
+    table.put(1, 10);
+    table.put(17,100);
+    table.put(4, 20);
+    Iterator<MyPair<Integer, Integer>> i = table.iterator();
+    assertTrue(i.hasNext());
+    assertEquals(1, Objects.requireNonNull(i.next()).getKey());
+    assertTrue(i.hasNext());
+    assertEquals(17, Objects.requireNonNull(i.next()).getKey());
+    assertTrue(i.hasNext());
+    assertEquals(4, Objects.requireNonNull(i.next()).getKey());
     assertFalse(i.hasNext());
   }
 }
@@ -488,6 +521,44 @@ class DataAnalyzerTests {
 
     assertEquals(k1, k2);
     assertEquals(v1, v2);
+  }
+
+  // round the average rating to two decimal number
+  @Test
+  @DisplayName("RatingCountPerProf Test 3")
+  void ratingCountPerProfTest3() {
+    Parser parser = new Parser("");
+
+    HashMap<String, Integer> fields = new HashMap<>();
+    fields.put("professor_name", 0);
+    fields.put("school_name", 1);
+    fields.put("department_name", 2);
+    fields.put("post_date", 3);
+    fields.put("student_star", 4);
+    fields.put("student_difficult", 5);
+    fields.put("comments", 6);
+    fields.put("gender", 7);
+
+    parser.fields = fields;
+    String[] prof1 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "08/26/2014", "5", "1", "Diana is a great professor and counselor!I took the class because I need extra units but I learned so much. She\'s very helpful and willing to answer any questions.It was like having a counseling appointment for 6 weeks.Now,I make my appointments with her.She as motivated as if it was her very first time teaching or counseling.We need more like her!", "F"};
+    String[] prof2 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "04/28/2013", "5", "1", "Super easy, funny, enthusiastic and helpful!!", "F"};
+    String[] prof3 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "04/28/2013", "4.5", "1", "She gives an extremely helpful and very fun class environment. I recommend this class for any freshmen who don\\'t quite understand the concept of GPA\\'s or regulations in LBCC.", "F"};
+    String[] prof4 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "04/28/2013", "4", "1", "She gives an extremely helpful and very fun class environment. I recommend this class for any freshmen who don\\'t quite understand the concept of GPA\\'s or regulations in LBCC.", "F"};
+
+    parser.data.add(prof1);
+    parser.data.add(prof2);
+    parser.data.add(prof3);
+    parser.data.add(prof4);
+
+    DataAnalyzer analyzer = new RatingDistributionBySchool(parser);
+    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("Long Beach City College");
+
+    ArrayList<String> k1 = output1.getKeySet();
+
+    ArrayList<String> expect = new ArrayList<>();
+    expect.add("diana  oqimachi" + "\n" + "4.63");
+
+    assertEquals(expect, k1);
   }
 
   // Correct gender output, F -> W
@@ -575,12 +646,62 @@ class DataAnalyzerTests {
     assertEquals(v1, v2);
   }
 
+  // check for abundant words in one sentence
+  @Test
+  @DisplayName("RatingByKeyword Test 3")
+  void ratingByKeywordTest3() {
+    Parser parser1 = new Parser("");
+    Parser parser2 = new Parser("");
+    ArrayList<String[]> dataArray1 = new ArrayList<>();
+    ArrayList<String[]> dataArray2 = new ArrayList<>();
+
+    HashMap<String, Integer> fields = new HashMap<>();
+    fields.put("professor_name", 0);
+    fields.put("school_name", 1);
+    fields.put("department_name", 2);
+    fields.put("post_date", 3);
+    fields.put("student_star", 4);
+    fields.put("student_difficult", 5);
+    fields.put("comments", 6);
+    fields.put("gender", 7);
+
+    parser1.fields = fields;
+    parser2.fields = fields;
+
+    String[] arr1 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "08/26/2014", "5", "1", "fun"};
+    String[] arr2 = {"Diana  Oqimachi", "Long Beach City College", "Counseling department", "08/26/2014", "5", "1", "Fun fun fun!"};
+    dataArray1.add(arr1);
+    dataArray2.add(arr2);
+
+    parser1.data = dataArray1;
+    parser2.data = dataArray2;
+
+    DataAnalyzer analyzer1 = new RatingByKeyword(parser1);
+    DataAnalyzer analyzer2 = new RatingByKeyword(parser2);
+
+    MyHashTable<String, Integer> output1 = analyzer1.getDistByKeyword("fun");
+    MyHashTable<String, Integer> output2 = analyzer2.getDistByKeyword("fun");
+
+    ArrayList<String> k1 = output1.getKeySet();
+    ArrayList<String> k2 = output2.getKeySet();
+    ArrayList<Integer> v1 = output1.getValueSet();
+    ArrayList<Integer> v2 = output2.getValueSet();
+
+    Collections.sort(k1);
+    Collections.sort(k2);
+    Collections.sort(v1);
+    Collections.sort(v1);
+
+    assertEquals(k1, k2);
+    assertEquals(v1, v2);
+  }
+
   @Test
   @DisplayName("RatingByGender Test 1")
   void ratingByGenderTest1() {
     p.read();
     DataAnalyzer analyzer = new RatingByGender(p);
-    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("F,difficulty");
+    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("F, difficulty");
     assertNotNull(output1.get("1"));
     assertNotNull(output1.get("2"));
     assertNotNull(output1.get("3"));
@@ -594,8 +715,8 @@ class DataAnalyzerTests {
   void ratingByGenderTest2() {
     p.read();
     DataAnalyzer analyzer = new RatingByGender(p);
-    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("M,Quality ");
-    MyHashTable<String, Integer> output2 = analyzer.getDistByKeyword("M,quality");
+    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("M, Quality ");
+    MyHashTable<String, Integer> output2 = analyzer.getDistByKeyword("M, quality");
 
     ArrayList<String> k1 = output1.getKeySet();
     ArrayList<String> k2 = output2.getKeySet();
@@ -608,6 +729,235 @@ class DataAnalyzerTests {
 
     assertEquals(k1, k2);
     assertEquals(v1, v2);
+  }
+
+  //test for invalid input strings
+  @Test
+  @DisplayName("RatingByGender Test 3")
+  void ratingByGenderTest3() {
+    p.read();
+    DataAnalyzer analyzer = new RatingByGender(p);
+    MyHashTable<String, Integer> output1 = analyzer.getDistByKeyword("M,       difficulty");
+    MyHashTable<String, Integer> output2 = analyzer.getDistByKeyword("F       , difficulty");
+    MyHashTable<String, Integer> output3 = analyzer.getDistByKeyword("F       ,       difficulty");
+    MyHashTable<String, Integer> output4 = analyzer.getDistByKeyword("M, in valid");
+    MyHashTable<String, Integer> output5 = analyzer.getDistByKeyword("x, quality");
+    MyHashTable<String, Integer> output6 = analyzer.getDistByKeyword("m, dIfFiCULTY");
+
+    assertNull(output1);
+    assertNull(output2);
+    assertNull(output3);
+    assertNull(output4);
+    assertNull(output5);
+    assertNotNull(output6);
+  }
+}
+
+// The below tests do not assert any outputs,
+// they time the runtime of each of your functions
+// with different number of entries and print out the time taken
+// You should observe with your own due diligence whether the increase in runtime is
+// your desired time complexity:
+//   constant O(1) for getDistByKeyword
+//   linear by bucket numbers O(m) for instantiation
+// You can plot it in your preferred data visualization method for some visuals
+
+// NOTE:
+// This method of stress testing is naive and not production-level
+// due to factors such different computer hardwares, compiler optimizations, and more
+// Please only use the data as a mere reference.
+class TimeTests {
+  // parser with no data
+  private final String[] NAMES = new String[]
+    {"Sam",
+      "Rebecca",
+      "Albert",
+      "Eric",
+      "Ludwig",
+      "XQC",
+      "Hasan"};
+  private final String[] UNI_WORDS = new String[]
+    {"Wild",
+      "Chicken",
+      "Omega",
+      "Theta",
+      "Polytechnic",
+      "Kappa"};
+  private final String[] DEPARTMENTS = new String[]
+    {"Mathematics",
+      "Philosophy",
+      "Physics",
+      "Statistics",
+      "Computer Science",
+      "Linguistic"};
+  private final String[] DAY = new String[]
+    {"01", "02", "03", "04", "05", "06", "07", "08", "09",
+      "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+      "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+      "30", "31"};
+  private final String[] MONTH = new String[]
+    {"01", "02", "03", "04", "05", "06", "07", "08", "09",
+      "10", "11", "12"};
+  private final String[] YEAR = new String[]{"1999", "2000", "2001", "2002", "2003"};
+  private final String[] RATINGS = new String[]{"1", "2", "3", "4", "5"};
+
+  Parser p = new Parser("/RateMyProf_Data_Gendered.csv");
+
+  private void parserInitFields() {
+    p.fields = new HashMap<>();
+    p.fields.put("professor_name", 0);
+    p.fields.put("school_name", 1);
+    p.fields.put("department_name", 2);
+    p.fields.put("post_date", 3);
+    p.fields.put("student_star", 4);
+    p.fields.put("student_difficult", 5);
+    p.fields.put("comments", 6);
+    p.fields.put("gender", 7);
+  }
+
+  private final int[] NUMBERS_OF_ENTRIES
+    = new int[]{100, 1000, 5000, 10000, 30000, 50000, 70000, 90000, 110000};
+
+  // fill the parser with randomly generated dummy data
+  private void parserInitData(int numberOfEntries) {
+    p.data = new ArrayList<>();
+    java.util.Random random = new java.util.Random();
+    String name = NAMES[random.nextInt(NAMES.length)];
+    String uni1 = UNI_WORDS[random.nextInt(UNI_WORDS.length)];
+    String uni2 = UNI_WORDS[random.nextInt(UNI_WORDS.length)];
+    String department = DEPARTMENTS[random.nextInt(DEPARTMENTS.length)];
+    String day = DAY[random.nextInt(DAY.length)];
+    String month = MONTH[random.nextInt(MONTH.length)];
+    String year = YEAR[random.nextInt(YEAR.length)];
+    String quality = RATINGS[random.nextInt(RATINGS.length)];
+    String difficulty = RATINGS[random.nextInt(RATINGS.length)];
+
+    for (int i = 0; i < numberOfEntries; i++) {
+      p.data.add(new String[]
+        {name,
+          String.format("%s %S University", uni1, uni2),
+          department + " department",
+          String.format("%s/%s/%s", month, day, year),
+          quality, difficulty,
+          "Lorem Ipsum Most amazing instructor! She makes class fun and interesting! Cares about her students and wants nothing more than to see you succeed!", "F"});
+    }
+  }
+
+  private <T> Pair<DataAnalyzer, Long> extract(Supplier<DataAnalyzer> constructor) {
+    Instant start = Instant.now();
+    DataAnalyzer analyzer = constructor.get();
+    Instant finish = Instant.now();
+
+    long time = Duration.between(start, finish).toMillis();
+    return new Pair<>(analyzer, time);
+  }
+
+  //returns time taken
+  private long query(DataAnalyzer analyzer, String keyword) {
+    Instant start = Instant.now();
+    analyzer.getDistByKeyword(keyword);
+    Instant finish = Instant.now();
+
+    return Duration.between(start, finish).toMillis();
+  }
+
+  @Test
+  @DisplayName("Time for RatingDistributionByProf")
+  void ratingDistributionByProfTime() {
+    parserInitFields();
+    Supplier<DataAnalyzer> constructor = () -> new RatingDistributionByProf(p);
+    String keyword = "Sam";
+
+    for (int num : NUMBERS_OF_ENTRIES) {
+      parserInitData(num);
+      Pair<DataAnalyzer, Long> extracted = extract(constructor);
+      DataAnalyzer analyzer = extracted.getKey();
+      Object time = extracted.getValue();
+
+      System.out.println("The time taken to extract information for " + num + " entries is " + time + "ms");
+      System.out.println("The time taken to query a keyword for " + num + " entries is " + query(analyzer, keyword) + "ms");
+      System.out.println();
+    }
+  }
+
+  @Test
+  @DisplayName("Time for RatingDistributionBySchool")
+  void ratingDistributionBySchoolTime() {
+    parserInitFields();
+    Supplier<DataAnalyzer> constructor = () -> new RatingDistributionBySchool(p);
+    String keyword = "Wild Chicken University";
+
+    for (int num : NUMBERS_OF_ENTRIES) {
+      parserInitData(num);
+
+      Pair<DataAnalyzer, Long> extracted = extract(constructor);
+      DataAnalyzer analyzer = extracted.getKey();
+      Object time = extracted.getValue();
+
+      System.out.println("The time taken to extract information for " + num + " entries is " + time + "ms");
+      System.out.println("The time taken to query a keyword for " + num + " entries is " + query(analyzer, keyword) + "ms");
+      System.out.println();
+    }
+  }
+
+  @Test
+  @DisplayName("Time for RatingByGender")
+  void ratingByGenderTime() {
+    parserInitFields();
+    Supplier<DataAnalyzer> constructor = () -> new RatingByGender(p);
+    String keyword = "F, difficulty";
+
+    for (int num : NUMBERS_OF_ENTRIES) {
+      parserInitData(num);
+
+      Pair<DataAnalyzer, Long> extracted = extract(constructor);
+      DataAnalyzer analyzer = extracted.getKey();
+      Object time = extracted.getValue();
+
+      System.out.println("The time taken to extract information for " + num + " entries is " + time + "ms");
+      System.out.println("The time taken to query a keyword for " + num + " entries is " + query(analyzer, keyword) + "ms");
+      System.out.println();
+    }
+  }
+
+  @Test
+  @DisplayName("Time for GenderByKeyword")
+  void genderByKeywordTime() {
+    parserInitFields();
+    Supplier<DataAnalyzer> constructor = () -> new GenderByKeyword(p);
+    String keyword = "fun";
+
+    for (int num : NUMBERS_OF_ENTRIES) {
+      parserInitData(num);
+
+      Pair<DataAnalyzer, Long> extracted = extract(constructor);
+      DataAnalyzer analyzer = extracted.getKey();
+      Object time = extracted.getValue();
+
+      System.out.println("The time taken to extract information for " + num + " entries is " + time + "ms");
+      System.out.println("The time taken to query a keyword for " + num + " entries is " + query(analyzer, keyword) + "ms");
+      System.out.println();
+    }
+  }
+
+  @Test
+  @DisplayName("Time for RatingByKeyword")
+  void ratingByKeyword() {
+    parserInitFields();
+    Supplier<DataAnalyzer> constructor = () -> new RatingByKeyword(p);
+    String keyword = "fun";
+
+    for (int num : NUMBERS_OF_ENTRIES) {
+      parserInitData(num);
+
+      Pair<DataAnalyzer, Long> extracted = extract(constructor);
+      DataAnalyzer analyzer = extracted.getKey();
+      Object time = extracted.getValue();
+
+      System.out.println("The time taken to extract information for " + num + " entries is " + time + "ms");
+      System.out.println("The time taken to query a keyword for " + num + " entries is " + query(analyzer, keyword) + "ms");
+      System.out.println();
+    }
   }
 }
 

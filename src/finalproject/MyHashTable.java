@@ -81,12 +81,11 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 			}
 		}
 
-		bucketList.addLast(inputNode);
-		size++;
+		bucketList.addLast(inputNode);//order doesn't matter
+		size++;//only increment if added a non-repeated value
 		if(size > MAX_LOAD_FACTOR*this.capacity){ //never be greater than the maximum load factor
 			this.rehash();
 		}
-
 		return null;
 	}
 
@@ -103,12 +102,11 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		for(MyPair<K,V> node:bucketList) {
 			if (node.getKey().equals(key)) {
 				returnValue = node.getValue();
+				break;
 			}
 		}
 
 		return returnValue;
-
-		//ADD YOUR CODE ABOVE HERE
 	}
 
 	/**
@@ -130,8 +128,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		}
 
 		return returnValue;
-
-		//ADD YOUR CODE ABOVE HERE
 	}
 
 
@@ -142,6 +138,24 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 	 * Expected average runtime is O(m), where m is the number of buckets
 	 */
 	public void rehash() {
+		ArrayList<LinkedList<MyPair<K,V>>> temp_bucket=this.buckets;
+		this.capacity=this.capacity*2;
+		this.size=0;
+		ArrayList<LinkedList<MyPair<K,V>>> resizeBucket=new ArrayList<>(this.capacity);
+		for(int i=0;i < this.capacity;i++) {//need to initialize
+			resizeBucket.add(new LinkedList<>());
+		}
+		this.buckets=resizeBucket;
+
+		for(int i=0;i < temp_bucket.size();i++) {
+			LinkedList<MyPair<K,V>> bucketList=temp_bucket.get(i);
+			for (MyPair<K, V> node : bucketList) {
+				this.put(node.getKey(),node.getValue());//ensure collision is handled
+			}
+		}
+	}
+	/*
+		public void rehash() {
 		this.capacity=this.capacity*2;
 
 		ArrayList<LinkedList<MyPair<K,V>>> resizeBucket=new ArrayList<>(this.capacity);
@@ -159,6 +173,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 
 		this.buckets=resizeBucket;
 	}
+	 */
 
 
 	/**
@@ -192,7 +207,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 			LinkedList<MyPair<K,V>> bucketList=this.buckets.get(i);
 			for (MyPair<K, V> node : bucketList) {
 				V nodeValue=node.getValue();
-				output.put(nodeValue,nodeValue);//used as a hashset?
+				output.put(nodeValue,nodeValue);
 			}
 		}
 
@@ -209,7 +224,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		ArrayList<MyPair<K, V>> output = new ArrayList<>();
 		for (int i = 0; i < this.capacity; i++) {
 			LinkedList<MyPair<K, V>> bucketList = this.buckets.get(i);
-			output.addAll(bucketList);//does this work?
+			output.addAll(bucketList);
 		}
 
 		return output;
@@ -229,7 +244,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		private int index;
 
 		private MyHashIterator() {
-			myEntries=new ArrayList<>(getEntries());
+			myEntries=getEntries();
 			index=0;
 		}
 
@@ -239,7 +254,7 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>>{
 		}
 
 		@Override
-		public MyPair<K,V> next() {//if the iteration has no more elements?
+		public MyPair<K,V> next() {//if the iteration has no more elements, prevent outOfBounds Error
 			if(index==myEntries.size()) return null;
 
 			MyPair<K,V> output=myEntries.get(index);

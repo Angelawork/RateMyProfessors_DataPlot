@@ -6,14 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4b75f5eb-ed82-45f8-a3e2-8149077513ae" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/MiniTester.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingDistributionByProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingDistributionByProf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/finalproject/StudentTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/StudentTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/myTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/myTester.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,12 +48,14 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/HQC/COMP 250/COMP 250 A2/Assignment2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15332031&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -65,6 +67,96 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\HQC\COMP 250\COMP 250 Final project\FinalProject\src" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MiniTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="finalproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="finalproject" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.MiniTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TimeTests.genderByKeywordTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="finalproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="finalproject" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.TimeTests" />
+      <option name="METHOD_NAME" value="genderByKeywordTime" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TimeTests.ratingByGenderTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="finalproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="finalproject" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.TimeTests" />
+      <option name="METHOD_NAME" value="ratingByGenderTime" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TimeTests.ratingByKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="finalproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="finalproject" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.TimeTests" />
+      <option name="METHOD_NAME" value="ratingByKeyword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TimeTests.ratingDistributionBySchoolTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="finalproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="finalproject" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.TimeTests" />
+      <option name="METHOD_NAME" value="ratingDistributionBySchoolTime" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MiniTest" />
+        <item itemvalue="JUnit.TimeTests.genderByKeywordTime" />
+        <item itemvalue="JUnit.TimeTests.ratingByKeyword" />
+        <item itemvalue="JUnit.TimeTests.ratingByGenderTime" />
+        <item itemvalue="JUnit.TimeTests.ratingDistributionBySchoolTime" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -101,11 +193,50 @@
       <workItem from="1682092377316" duration="4537000" />
       <workItem from="1682131468726" duration="1124000" />
       <workItem from="1682187932498" duration="5450000" />
+      <workItem from="1682200379744" duration="85000" />
+      <workItem from="1682206958615" duration="1350000" />
+      <workItem from="1682208345789" duration="543000" />
+      <workItem from="1682212108874" duration="135000" />
+      <workItem from="1682213213953" duration="111000" />
+      <workItem from="1682217725400" duration="557000" />
+      <workItem from="1682270437573" duration="76000" />
+      <workItem from="1682271429489" duration="21000" />
+      <workItem from="1682359765987" duration="4779000" />
+      <workItem from="1682375646207" duration="1129000" />
+      <workItem from="1682406218680" duration="611000" />
+      <workItem from="1682443089565" duration="595000" />
+      <workItem from="1682452095409" duration="3824000" />
+      <workItem from="1682460294552" duration="765000" />
+      <workItem from="1682543855534" duration="7895000" />
+      <workItem from="1682617057994" duration="835000" />
+      <workItem from="1682619020199" duration="5371000" />
+      <workItem from="1682626499914" duration="1518000" />
+      <workItem from="1682629377473" duration="6137000" />
+      <workItem from="1682637141385" duration="12109000" />
+      <workItem from="1682690783681" duration="871000" />
+      <workItem from="1682691844966" duration="726000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/finalproject/myTester.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="output" language="JAVA" />
+        <watch expression="output.buckets.get(4).get(1).value" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

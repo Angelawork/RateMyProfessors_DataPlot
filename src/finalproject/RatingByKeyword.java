@@ -20,7 +20,7 @@ public class RatingByKeyword extends DataAnalyzer {
 		int comment_index = parser.fields.get("comments");
 		int rating_index = parser.fields.get("student_star");
 
-		storageTable = new MyHashTable<>();
+		storageTable = new MyHashTable<>(250);
 		for (int i = 0; i < parser.data.size(); i++) {
 			double score = Double.parseDouble(parser.data.get(i)[rating_index]);
 			String comment = parser.data.get(i)[comment_index].toLowerCase();
@@ -45,22 +45,20 @@ public class RatingByKeyword extends DataAnalyzer {
 					break;
 			}
 
-			String[] words = replace(comment).split(" ");//apostrophe char?
-
-			//for unique words in 1 comment??
-			MyHashTable<String,String> unique_words=new MyHashTable<>(200);
+			String[] words = replace(comment).split(" ");
+			
+			MyHashTable<String,String> unique_words=new MyHashTable<>(150);
 			for (String elmt : words) {
 				unique_words.put(elmt,elmt);
 			}
-			ArrayList<String> mywords=unique_words.getKeySet();
+			ArrayList<String> mywords=unique_words.getKeySet();//runs in O(n) of n words in a comment
 
 			for (String elmt : mywords) {
 				if (elmt.equalsIgnoreCase("")) continue;
-				//else if(storageTable.getKeySet().contains(elmt)) continue;
 
 				MyHashTable<String, Integer> infoTable=storageTable.get(elmt);
 				if(infoTable==null){
-					infoTable=new MyHashTable<>(7);
+					infoTable=new MyHashTable<>(8);
 					infoTable.put("1",0);
 					infoTable.put("2",0);
 					infoTable.put("3",0);

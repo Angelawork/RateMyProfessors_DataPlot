@@ -27,12 +27,12 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 		scoreTable=new MyHashTable<>();
 		for (int i = 0; i < parser.data.size(); i++) {
 			String name = parser.data.get(i)[name_index].trim().toLowerCase();
-			String school = parser.data.get(i)[school_index].trim().toLowerCase();
+			String school = parser.data.get(i)[school_index].trim().toLowerCase();//trim and LowerCase all strings!
 			double score=Double.parseDouble(parser.data.get(i)[rating_index]);
 
 			MyHashTable<String, Integer> infoTable = storageTable.get(school);
 			if (infoTable == null) {
-				infoTable=new MyHashTable<>();//run in O(1)?
+				infoTable=new MyHashTable<>();
 				infoTable.put(name, 1);
 				storageTable.put(school, infoTable);
 			} else {

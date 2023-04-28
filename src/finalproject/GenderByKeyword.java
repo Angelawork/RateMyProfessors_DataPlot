@@ -14,26 +14,42 @@ public class GenderByKeyword extends DataAnalyzer {
 
 	@Override
 	public MyHashTable<String, Integer> getDistByKeyword(String keyword) {
+		int wordNotFound=0;
 		keyword=keyword.trim().toLowerCase();
-		output=new MyHashTable<>();
-		if(maleTable.get(keyword)==null)output.put("M",0);
-		else output.put("M",maleTable.get(keyword));
+		output=new MyHashTable<>(6);
 
-		if(femaleTable.get(keyword)==null)output.put("F",0);
-		else output.put("F",femaleTable.get(keyword));
+		Integer my_count=maleTable.get(keyword);
+		if(my_count==null){
+			output.put("M",0);
+			wordNotFound++;
+		}
+		else output.put("M",my_count);
 
-		if(xTable.get(keyword)==null)output.put("X",0);
-		else output.put("X",xTable.get(keyword));
-		return output;
+		my_count=femaleTable.get(keyword);
+		if(my_count==null){
+			output.put("F",0);
+			wordNotFound++;
+		}
+		else output.put("F",my_count);
+
+		my_count=xTable.get(keyword);
+		if(my_count==null){
+			output.put("X",0);
+			wordNotFound++;
+		}
+		else output.put("X",my_count);
+
+		if(wordNotFound==3) return null;//if all of them dont contain the word, return null instead of a table of 0?
+		else return output;
 	}
 
 	@Override
 	public void extractInformation() {
 		int comment_index = parser.fields.get("comments");
 		int gender_index = parser.fields.get("gender");
-		maleTable=new MyHashTable<>(150);
-		femaleTable=new MyHashTable<>(150);
-		xTable=new MyHashTable<>(150);
+		maleTable=new MyHashTable<>(180);
+		femaleTable=new MyHashTable<>(180);
+		xTable=new MyHashTable<>(180);
 
 		for (int i = 0; i < parser.data.size(); i++) {
 			String gender=parser.data.get(i)[gender_index];
@@ -41,16 +57,14 @@ public class GenderByKeyword extends DataAnalyzer {
 
 			String[] words=replace(comment).split(" ");//comment.replaceAll("[^a-z']"," ").split(" ");
 
-			/*
-			MyHashTable<String,String> unique_words=new MyHashTable<>();
+			MyHashTable<String,String> unique_words=new MyHashTable<>(150);
 			for (String elmt : words) {
 				unique_words.put(elmt,elmt);
 			}
-			ArrayList<String> mywords=unique_words.getValueSet();
-			 */
+			ArrayList<String> mywords=unique_words.getKeySet();
 
-			for (String elmt : words) {
-				if(elmt.equalsIgnoreCase(""))continue;
+			for (String elmt : mywords) {
+				if(elmt.equalsIgnoreCase(""))continue;//empty strings should not be considered as words
 
 				if(gender.equalsIgnoreCase("M")){
 					Integer count=maleTable.get(elmt);
