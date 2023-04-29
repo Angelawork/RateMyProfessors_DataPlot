@@ -113,25 +113,49 @@ public class RatingByGender extends DataAnalyzer{
 
 	private void initialize_gender(String gender){
 		MyHashTable<String, MyHashTable<String, Integer>> temp_genderTable=myTable.get(gender);
-		if(temp_genderTable==null) {
-			temp_genderTable = new MyHashTable<>(6);
+		if(gender.equalsIgnoreCase("m") && temp_genderTable==null){
+			if(myTable.get("F")!=null){
+				temp_genderTable = new MyHashTable<>(6);
 
-			MyHashTable<String, Integer> qualityTable = new MyHashTable<>(7);
-			qualityTable.put("1", 0);
-			qualityTable.put("2", 0);
-			qualityTable.put("3", 0);
-			qualityTable.put("4", 0);
-			qualityTable.put("5", 0);
-			MyHashTable<String, Integer> diffTable = new MyHashTable<>(7);
-			diffTable.put("1", 0);
-			diffTable.put("2", 0);
-			diffTable.put("3", 0);
-			diffTable.put("4", 0);
-			diffTable.put("5", 0);
+				MyHashTable<String, Integer> qualityTable = new MyHashTable<>(7);
+				qualityTable.put("1", 0);
+				qualityTable.put("2", 0);
+				qualityTable.put("3", 0);
+				qualityTable.put("4", 0);
+				qualityTable.put("5", 0);
+				MyHashTable<String, Integer> diffTable = new MyHashTable<>(7);
+				diffTable.put("1", 0);
+				diffTable.put("2", 0);
+				diffTable.put("3", 0);
+				diffTable.put("4", 0);
+				diffTable.put("5", 0);
 
-			temp_genderTable.put("quality", qualityTable);
-			temp_genderTable.put("difficulty", diffTable);
-			myTable.put(gender, temp_genderTable);
+				temp_genderTable.put("quality", qualityTable);
+				temp_genderTable.put("difficulty", diffTable);
+				myTable.put(gender, temp_genderTable);
+			}
+		}else if(gender.equalsIgnoreCase("f") && temp_genderTable==null){
+			if(myTable.get("M")!=null){
+				temp_genderTable = new MyHashTable<>(6);
+
+				MyHashTable<String, Integer> qualityTable = new MyHashTable<>(7);
+				qualityTable.put("1", 0);
+				qualityTable.put("2", 0);
+				qualityTable.put("3", 0);
+				qualityTable.put("4", 0);
+				qualityTable.put("5", 0);
+				MyHashTable<String, Integer> diffTable = new MyHashTable<>(7);
+				diffTable.put("1", 0);
+				diffTable.put("2", 0);
+				diffTable.put("3", 0);
+				diffTable.put("4", 0);
+				diffTable.put("5", 0);
+
+				temp_genderTable.put("quality", qualityTable);
+				temp_genderTable.put("difficulty", diffTable);
+				myTable.put(gender, temp_genderTable);
+			}
 		}
+
 	}
 }

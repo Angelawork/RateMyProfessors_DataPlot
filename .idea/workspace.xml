@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b75f5eb-ed82-45f8-a3e2-8149077513ae" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/GenderByKeyword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/MiniTester.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/MyHashTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByGender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingByKeyword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/RatingDistributionBySchool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/StudentTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/StudentTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/finalproject/myTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/finalproject/myTester.java" afterDir="false" />
     </list>
@@ -214,7 +208,12 @@
       <workItem from="1682629377473" duration="6137000" />
       <workItem from="1682637141385" duration="12109000" />
       <workItem from="1682690783681" duration="871000" />
-      <workItem from="1682691844966" duration="726000" />
+      <workItem from="1682691844966" duration="2538000" />
+      <workItem from="1682697869562" duration="4828000" />
+      <workItem from="1682718481561" duration="147000" />
+      <workItem from="1682720536094" duration="45000" />
+      <workItem from="1682729103811" duration="664000" />
+      <workItem from="1682729793912" duration="67000" />
     </task>
     <servers />
   </component>
@@ -229,8 +228,18 @@
           <line>59</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/finalproject/StudentTests.java</url>
+          <line>847</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="finalproject.MyHashTable" memberName="buckets" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="output" language="JAVA" />

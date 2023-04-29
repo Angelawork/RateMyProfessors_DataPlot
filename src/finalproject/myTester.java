@@ -55,113 +55,150 @@ public class myTester {
         Parser parser = new Parser("/src/testing.csv");
         parser.read();
         DataAnalyzer ratingByKeyword = new RatingByGender(parser);
-        MyHashTable<String, Integer> output = ratingByKeyword.getDistByKeyword("  m, q ,ua, li ty          ");//return null
+        MyHashTable<String, Integer> output = ratingByKeyword.getDistByKeyword("  m, quality          ");//return null
 
         MyHashTable<Integer,String> timer = new MyHashTable<>();
+        HashMap<Integer,String> compare=new HashMap<>();
         String[] vals={"a","b","c","d","e"};
 
         //---------------------------------------------//
         for(int j=0;j<10000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         long startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
         System.out.println("put 10000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
         //---------------------------------------------//
 
         timer = new MyHashTable<>();
         for(int j=0;j<50000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         endTime = System.currentTimeMillis();
         duration = (endTime - startTime);
         System.out.println("put 50000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
         //---------------------------------------------//
 
         timer = new MyHashTable<>();
         for(int j=0;j<70000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         endTime = System.currentTimeMillis();
         duration = (endTime - startTime);
         System.out.println("put 70000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
         //---------------------------------------------//
         timer = new MyHashTable<>();
         for(int j=0;j<100000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         endTime = System.currentTimeMillis();
         duration = (endTime - startTime);
         System.out.println("put 100000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
         //---------------------------------------------//
         timer = new MyHashTable<>();
         for(int j=0;j<130000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         endTime = System.currentTimeMillis();
         duration = (endTime - startTime);
         System.out.println("put 130000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
         //---------------------------------------------//
         timer = new MyHashTable<>();
         for(int j=0;j<150000;j++){
             timer.put(j,vals[j%5]);
+            compare.put(j,vals[j%5]);
         }
         startTime = System.currentTimeMillis();
         timer.put(500,"hi");
         endTime = System.currentTimeMillis();
         duration = (endTime - startTime);
         System.out.println("put 150000 Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        compare.put(500,"hi");
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap Runtime in ms: " + duration);
 
-        removeRuntime(timer);
+        removeRuntime(timer,compare);
 
-        setgetRuntime(timer,'K');
-        setgetRuntime(timer,'V');
-        rehashtime(timer);
+        setgetRuntime(timer,'K',compare);
+        setgetRuntime(timer,'V',compare);
+        rehashtime(timer,compare);
         System.out.println("-------------------------");
 
 
@@ -170,14 +207,19 @@ public class myTester {
 
     }
 
-    static void removeRuntime(MyHashTable<Integer,String> timer){
+    static void removeRuntime(MyHashTable<Integer,String> timer,HashMap<Integer,String> tester){
         long startTime = System.currentTimeMillis();
         timer.remove(4);
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
         System.out.println("remove Runtime in ms: " + duration);
+        startTime = System.currentTimeMillis();
+        tester.remove(4);
+        endTime = System.currentTimeMillis();
+         duration = (endTime - startTime);
+        System.out.println("hashmap remove Runtime in ms: " + duration);
     }
-    static void setgetRuntime(MyHashTable<Integer,String> timer,char x){
+    static void setgetRuntime(MyHashTable<Integer,String> timer,char x,HashMap<Integer,String> tester){
         long startTime = System.currentTimeMillis();
         //ArrayList<Integer> yz=new ArrayList<>();
         if(x=='K'){timer.getKeySet();}
@@ -186,12 +228,20 @@ public class myTester {
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
         System.out.println("get Set of "+x+" for Runtime in ms: " +duration);
+
+        startTime = System.currentTimeMillis();
+        if(x=='K'){tester.keySet();}
+        else tester.values();
+        endTime = System.currentTimeMillis();
+        duration = (endTime - startTime);
+        System.out.println("hashmap get Set of "+x+" for Runtime in ms: " +duration);
     }
-    static void rehashtime(MyHashTable<Integer,String> timer){
+    static void rehashtime(MyHashTable<Integer,String> timer,HashMap<Integer,String> tester){
         long startTime = System.currentTimeMillis();
         timer.rehash();
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
         System.out.println("remove Runtime in ms: " + duration);
+
     }
 }
